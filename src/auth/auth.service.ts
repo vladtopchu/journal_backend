@@ -7,8 +7,4 @@ import { AuthDto } from "./dto/auth.dto";
 @Injectable()
 export class AuthService {
 	constructor(private jwtService: JwtService) { }
-
-	async getJwt(userId: string) {
-
-	}
 }

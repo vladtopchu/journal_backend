@@ -6,6 +6,8 @@ import { UsersService } from '../users/users.service';
 import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { Mongoose, SchemaTypes } from 'mongoose';
+import { Schema } from '@nestjs/mongoose';
 
 @Controller('auth')
 export class AuthController {
@@ -31,9 +33,9 @@ export class AuthController {
 		}
 
 		if (await bcrypt.compare(authDto.password, user.password)) {
-			console.log(user["_id"]);
+			console.log(user["_id"].toString());
 			return {
-				access_token: this.jwtService.sign(user["_id"])
+				access_token: this.jwtService.sign(user["_id"].toString())
 			}
 		} else {
 			return response.status(HttpStatus.UNAUTHORIZED).send({
@@ -53,9 +55,9 @@ export class AuthController {
 			})
 		}
 		let user = await this.usersService.createUser(userDto)
-		console.log(user["_id"]);
+		console.log(user["_id"].toString());
 		return {
-			access_token: this.jwtService.sign(user["_id"])
+			access_token: this.jwtService.sign(user["_id"].toString())
 		}
 	}
 }

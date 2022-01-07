@@ -32,10 +32,9 @@ export class AuthController {
 		}
 
 		if (await bcrypt.compare(authDto.password, user.password)) {
-			console.log(user["_id"].toString());
-			return {
-				access_token: this.jwtService.sign({ userId: user["_id"].toString() })
-			}
+			let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
+			console.log(access_token);
+			return response.status(HttpStatus.OK).send(access_token)
 		} else {
 			return response.status(HttpStatus.UNAUTHORIZED).send({
 				status: HttpStatus.UNAUTHORIZED,
@@ -54,10 +53,8 @@ export class AuthController {
 		}
 		let user = await this.usersService.createUser(userDto)
 		console.log(user["_id"].toString());
-		let access_token = this.jwtService.sign({ userId: user["_id"].toString() })
+		let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
 		console.log(access_token);
-		return {
-			access_token
-		}
+		return response.status(HttpStatus.OK).send(access_token)
 	}
 }

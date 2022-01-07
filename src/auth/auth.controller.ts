@@ -1,11 +1,10 @@
 import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { UserDto } from 'src/users/dto/user.dto';
-import { User } from 'src/users/user.schema';
-import { UsersService } from 'src/users/users.service';
+import { UserDto } from '../users/dto/user.dto';
+import { User } from '../users/user.schema';
+import { UsersService } from '../users/users.service';
 import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
-import { AuthService } from './auth.service';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')

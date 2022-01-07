@@ -43,6 +43,7 @@ export class AuthController {
 		}
 	}
 
+
 	@Post('signup')
 	async signUp(@Body() userDto: UserDto, @Res() response: Response) {
 

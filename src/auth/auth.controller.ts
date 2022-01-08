@@ -58,10 +58,15 @@ export class AuthController {
 				message: 'Username, email or phone should exist'
 			})
 		}
-		let user = await this.usersService.createUser({ ...userDto, password: await bcrypt.hash(userDto.password, 10) })
-		console.log(user["_id"].toString());
-		let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
-		console.log(access_token);
-		return response.status(HttpStatus.OK).send(access_token)
+		try {
+			let user = await this.usersService.createUser({ ...userDto, password: await bcrypt.hash(userDto.password, 10) })
+			console.log(user["_id"].toString());
+			let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
+			console.log(access_token);
+			return response.status(HttpStatus.OK).send(access_token)
+		} catch (e: any) {
+			console.log(e);
+			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: e['message'] })
+		}
 	}
 }

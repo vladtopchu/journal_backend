@@ -12,11 +12,7 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 	controllers: [BooksController],
 	providers: [
 		BooksService,
-		BooksRepository,
-		{
-			provide: APP_GUARD,
-			useClass: JwtAuthGuard
-		}
+		BooksRepository
 	]
 })
 

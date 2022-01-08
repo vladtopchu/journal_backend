@@ -12,6 +12,11 @@ export class BooksService {
 		return this.booksRepository.findById(bookId)
 	}
 
+
+	async getAllUsersBooks(userId: string): Promise<Book[]> {
+		return this.booksRepository.findAll({ userId })
+	}
+
 	async getAllBooks(): Promise<Book[]> {
 		return this.booksRepository.findAll({})
 	}

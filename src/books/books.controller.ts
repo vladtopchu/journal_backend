@@ -20,8 +20,8 @@ export class BooksController {
 	}
 
 	@Get()
-	async getAllBooks(): Promise<Book[]> {
-		return this.booksService.getAllBooks()
+	async getAllUsersBooks(@Request() req: any): Promise<Book[]> {
+		return this.booksService.getAllUsersBooks(req.user.userId)
 	}
 
 	@Post()

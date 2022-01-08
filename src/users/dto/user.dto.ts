@@ -1,4 +1,5 @@
 import { IsEmail, IsOptional, IsPhoneNumber, IsString } from "class-validator";
+import { Role } from "src/auth/utils/role.enum";
 
 export class UserDto {
 	@IsString()
@@ -16,4 +17,6 @@ export class UserDto {
 	@IsString()
 	@IsOptional()
 	username?: string;
+	@IsOptional()
+	role?: Role = Role.User
 }

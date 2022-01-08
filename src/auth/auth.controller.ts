@@ -31,6 +31,13 @@ export class AuthController {
 			user = await this.usersService.findUserByPhone(authDto.phone)
 		}
 
+		if (!user) {
+			return response.status(HttpStatus.UNAUTHORIZED).send({
+				status: HttpStatus.UNAUTHORIZED,
+				message: "User with such credentials doesn't exist"
+			})
+		}
+
 		if (await bcrypt.compare(authDto.password, user.password)) {
 			let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
 			console.log(access_token);

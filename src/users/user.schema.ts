@@ -11,14 +11,12 @@ export class User {
 	surname: string;
 	@Prop()
 	password: string;
-	@Prop()
+	@Prop({ unique: true })
 	username?: string;
-	@Prop()
+	@Prop({ unique: true })
 	email?: string;
-	@Prop()
+	@Prop({ unique: true })
 	phone?: string;
-	@Prop()
-	id?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Patch, Post, Req, Request, Res } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './book.schema';
@@ -10,8 +10,13 @@ export class BooksController {
 	constructor(private readonly booksService: BooksService) { }
 
 	@Get(':bookId')
-	async getBook(@Param('bookId') bookId: string): Promise<Book> {
-		return this.booksService.getBookById(bookId)
+	async getBook(@Request() req: any, @Param('bookId') bookId: string, @Res() response: Response): Promise<any> {
+		let book = await this.booksService.getBookById(bookId)
+		if (book.userId == req.user.userId) {
+			return book
+		} else {
+			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Book is not exist" })
+		}
 	}
 
 	@Get()
@@ -20,8 +25,8 @@ export class BooksController {
 	}
 
 	@Post()
-	async createBook(@Body() createBookDto: CreateBookDto): Promise<Book> {
-		return this.booksService.createBook(createBookDto)
+	async createBook(@Request() req: any, @Body() createBookDto: CreateBookDto): Promise<Book> {
+		return this.booksService.createBook({ ...createBookDto, userId: req.user.userId })
 	}
 
 	@Patch(':bookId')

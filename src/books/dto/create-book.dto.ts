@@ -2,7 +2,8 @@ import { IsMongoId, IsNumber, IsOptional, IsString, IsUrl } from "class-validato
 
 export class CreateBookDto {
 	@IsMongoId()
-	userId: string;
+	@IsOptional()
+	userId?: string;
 	@IsString()
 	title: string;
 	@IsString()

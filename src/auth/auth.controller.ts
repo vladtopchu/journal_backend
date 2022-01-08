@@ -58,7 +58,7 @@ export class AuthController {
 				message: 'Username, email or phone should exist'
 			})
 		}
-		let user = await this.usersService.createUser(userDto)
+		let user = await this.usersService.createUser({ ...userDto, password: await bcrypt.hash(userDto.password, 10) })
 		console.log(user["_id"].toString());
 		let access_token = { access_token: this.jwtService.sign({ userId: user["_id"].toString() }) }
 		console.log(access_token);

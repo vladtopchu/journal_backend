@@ -13,7 +13,6 @@ import { BooksService } from "src/books/books.service";
 	providers: [
 		BookNotesService,
 		BookNotesRepository,
-		BooksService,
 		BooksService
 	],
 	exports: [

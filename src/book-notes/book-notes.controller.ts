@@ -31,7 +31,10 @@ export class BookNotesController {
 
 	@Post()
 	async createBookNote(@Request() req: any, @Body() createBookNoteDto: CreateBookNoteDto, @Res() response: Response) {
+		console.log("CREATE BOOK NOTE CONTROLLER");
+		console.log(createBookNoteDto);
 		let book = await this.booksService.getBookById(createBookNoteDto.bookId)
+		console.log(book)
 		if (book && book.userId == req.user.userId) {
 			return this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
 		} else {

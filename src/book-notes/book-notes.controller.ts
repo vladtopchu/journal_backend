@@ -34,10 +34,12 @@ export class BookNotesController {
 		console.log("CREATE BOOK NOTE CONTROLLER");
 		console.log(createBookNoteDto);
 		let book = await this.booksService.getBookById(createBookNoteDto.bookId)
-		console.log(book)
+		console.log("BOOK:", book)
 		if (book && book.userId == req.user.userId) {
+			console.log("PASSED");
 			return this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
 		} else {
+			console.log("DIDN'T PASSED");
 			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Book doesn't exist" })
 		}
 	}

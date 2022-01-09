@@ -17,7 +17,7 @@ export class BookNotesService {
 		return this.bookNotesRepository.findMatching({ userId, bookId })
 	}
 
-	async createBookNote(createBookNoteDto: CreateBookNoteDto) {
+	async createBookNote(createBookNoteDto: CreateBookNoteDto): Promise<BookNote> {
 		return this.bookNotesRepository.createBookNote(createBookNoteDto)
 	}
 

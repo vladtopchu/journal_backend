@@ -71,7 +71,7 @@ export class ${className} {
 	constructor(private readonly ${_name.decapitalize()}Service: ${_name}Service) { }
 
 	@Get()
-	getSomething(): any {
+	getSomething(): Promise<any> {
 		return ;
 	}
 }`)

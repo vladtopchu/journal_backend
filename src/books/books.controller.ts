@@ -17,7 +17,7 @@ export class BooksController {
 		if (book.userId == req.user.userId) {
 			return book
 		} else {
-			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Book is not exist" })
+			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Book doesn't exist" })
 		}
 	}
 

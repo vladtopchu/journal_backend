@@ -3,11 +3,25 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { BookNotesController } from "./book-notes.controller";
 import { BookNote, BookNoteSchema } from "./book-note.schema";
 import { BookNotesService } from "./book-notes.service";
+import { BookNotesRepository } from "./book-notes.repository";
+import { BooksModule } from "src/books/books.module";
+import { BooksService } from "src/books/books.service";
+import { BooksRepository } from "src/books/books.repository";
 
 @Module({
-	imports: [MongooseModule.forFeature([{ name: BookNote.name, schema: BookNoteSchema }])],
+	imports: [MongooseModule.forFeature([{ name: BookNote.name, schema: BookNoteSchema }]), BooksModule],
 	controllers: [BookNotesController],
-	providers: [BookNotesService]
+	providers: [
+		BookNotesService,
+		BookNotesRepository,
+		BooksService,
+		BooksService,
+		BooksRepository
+	],
+	exports: [
+		BookNotesService,
+		BookNotesRepository
+	]
 })
 
 export class BookNotesModule { }

@@ -18,7 +18,7 @@ export class BookNotesController {
 	async getNoteById(@Request() req: any, @Param('noteId') noteId: string, @Res() response: Response): Promise<any> {
 		let note = await this.bookNotesService.getNoteById(noteId)
 		if (note.userId == req.user.userId) {
-			return note
+			return response.status(HttpStatus.OK).send(note)
 		} else {
 			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Note doesn't exist" })
 		}

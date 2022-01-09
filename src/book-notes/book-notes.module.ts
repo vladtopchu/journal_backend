@@ -6,7 +6,6 @@ import { BookNotesService } from "./book-notes.service";
 import { BookNotesRepository } from "./book-notes.repository";
 import { BooksModule } from "src/books/books.module";
 import { BooksService } from "src/books/books.service";
-import { BooksRepository } from "src/books/books.repository";
 
 @Module({
 	imports: [MongooseModule.forFeature([{ name: BookNote.name, schema: BookNoteSchema }]), BooksModule],
@@ -15,8 +14,7 @@ import { BooksRepository } from "src/books/books.repository";
 		BookNotesService,
 		BookNotesRepository,
 		BooksService,
-		BooksService,
-		BooksRepository
+		BooksService
 	],
 	exports: [
 		BookNotesService,

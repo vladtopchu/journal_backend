@@ -38,7 +38,7 @@ export class BookNotesController {
 		console.log("BOOK:", book)
 		if (book && book.userId == req.user.userId) {
 			console.log("PASSED");
-			let note = this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
+			let note = await this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
 			console.log(note);
 			return note
 		} else {

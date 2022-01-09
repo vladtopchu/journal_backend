@@ -16,8 +16,8 @@ export class BookNotesRepository {
 		return this.bookNoteModel.find(filterQuery)
 	}
 
-	async createBookNote(createBookNote: CreateBookNoteDto): Promise<BookNote> {
-		const newBookNote = new this.bookNoteModel(createBookNote)
+	async createBookNote(bookNote: BookNote): Promise<BookNote> {
+		const newBookNote = new this.bookNoteModel(bookNote)
 		return newBookNote.save()
 	}
 

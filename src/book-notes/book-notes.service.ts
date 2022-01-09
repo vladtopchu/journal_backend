@@ -18,7 +18,12 @@ export class BookNotesService {
 	}
 
 	async createBookNote(createBookNoteDto: CreateBookNoteDto): Promise<BookNote> {
-		return this.bookNotesRepository.createBookNote(createBookNoteDto)
+		return this.bookNotesRepository.createBookNote({
+			userId: createBookNoteDto.userId,
+			bookId: createBookNoteDto.bookId,
+			note: createBookNoteDto.note,
+			page: createBookNoteDto.page
+		})
 	}
 
 	async deleteBookNote(noteId: string) {

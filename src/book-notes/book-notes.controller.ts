@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Request,
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BooksService } from 'src/books/books.service';
+import { BookNote } from './book-note.schema';
 import { BookNotesService } from './book-notes.service';
 import { CreateBookNoteDto } from './dto/create-book-note.dto';
 
@@ -30,7 +31,7 @@ export class BookNotesController {
 	}
 
 	@Post()
-	async createBookNote(@Request() req: any, @Body() createBookNoteDto: CreateBookNoteDto, @Res() response: Response) {
+	async createBookNote(@Request() req: any, @Body() createBookNoteDto: CreateBookNoteDto, @Res() response: Response): Promise<any> {
 		console.log("CREATE BOOK NOTE CONTROLLER");
 		console.log(createBookNoteDto);
 		let book = await this.booksService.getBookById(createBookNoteDto.bookId)

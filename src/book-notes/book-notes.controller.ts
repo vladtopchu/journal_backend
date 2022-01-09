@@ -15,7 +15,7 @@ export class BookNotesController {
 	) { }
 
 	@Get(':noteId')
-	async getNoteById(@Request() req: any, @Param('noteId') noteId: string, @Res() response: Response) {
+	async getNoteById(@Request() req: any, @Param('noteId') noteId: string, @Res() response: Response): Promise<any> {
 		let note = await this.bookNotesService.getNoteById(noteId)
 		if (note.userId == req.user.userId) {
 			return note

@@ -37,7 +37,9 @@ export class BookNotesController {
 		console.log("BOOK:", book)
 		if (book && book.userId == req.user.userId) {
 			console.log("PASSED");
-			return this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
+			let note = this.bookNotesService.createBookNote({ ...createBookNoteDto, userId: req.user.userId })
+			console.log(note);
+			return note
 		} else {
 			console.log("DIDN'T PASSED");
 			return response.status(HttpStatus.BAD_REQUEST).send({ status: HttpStatus.BAD_REQUEST, message: "Book doesn't exist" })

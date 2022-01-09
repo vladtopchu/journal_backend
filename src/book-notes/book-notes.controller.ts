@@ -24,7 +24,7 @@ export class BookNotesController {
 		}
 	}
 
-	@Get(':bookId')
+	@Get('book/:bookId')
 	async getBooksNotes(@Request() req: any, @Param('bookId') bookId: string) {
 		let notes = await this.bookNotesService.getBooksNotes(req.user.userId, bookId)
 		return notes
